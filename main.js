@@ -41,6 +41,13 @@ document.querySelectorAll('input[name="level"]').forEach(input => {
   })
 });
 
+// To be revised. DGrothe-PhD tests stuff.
+function clickedOnCell(i, j){
+  var pickedInnerCell = document.getElementById(`cell-${i}-${j}`);
+  // in lieu of: changing bgcolor by changing some css class.
+  console.log(`Clicked on cell-${i}-${j}.`);
+}
+
 function generateGameBoard() {
   // Set height of gameBoard
   const gameBoard = document.getElementById("gameBoard");
@@ -60,6 +67,7 @@ function generateGameBoard() {
     gameBoard.appendChild(outerCell);
 
     for (let j = 0; j < practiseBoard[i].length; j++) {
+      // maybe put innerCells in a static class or similar, instead of overwriting things every time?
       let innerCell = document.createElement("div");
 
       innerCell.classList.add(["innerCell"]);
@@ -69,6 +77,10 @@ function generateGameBoard() {
       innerCell.classList.add(["justify-center"]);
       innerCell.classList.add(["items-center"]);
       innerCell.setAttribute(`id`, `cell-${i}-${j}`);
+
+      innerCell.addEventListener("click", () => {
+        clickedOnCell(i, j);
+      });
 
       if (guessMode) {
         innerCell.classList.add(["grid"]);
